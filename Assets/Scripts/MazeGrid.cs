@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazeGrid : MonoBehaviour
+public class MazeGrid
 {
-    public int width;
-    public int height;
+    private int width;
+    private int height;
 
     public MazeGrid(int width, int height)
     {
