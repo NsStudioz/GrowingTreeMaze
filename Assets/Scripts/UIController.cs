@@ -36,20 +36,6 @@ public class UIController : MonoBehaviour
     // Toggle Events:
     public static event Action<bool> OnGenerationToggleChange;
 
-    // Removing all UI listeners.
-    private void OnDestroy()
-    {
-        // Buttons:
-        playBtn.onClick.RemoveAllListeners();
-        backBtn.onClick.RemoveAllListeners();
-        generateMazeBtn.onClick.RemoveAllListeners();
-        // Sliders:
-        widthSilder.onValueChanged.RemoveAllListeners();
-        heightSilder.onValueChanged.RemoveAllListeners();
-        // Toggle:
-        generationToggle.onValueChanged.RemoveAllListeners();
-    }
-
     void Start()
     {
         // Buttons:
@@ -126,5 +112,20 @@ public class UIController : MonoBehaviour
     }
 
     #endregion
+
+
+    // Removing all UI listeners.
+    private void OnDestroy()
+    {
+        // Buttons:
+        playBtn.onClick.RemoveAllListeners();
+        backBtn.onClick.RemoveAllListeners();
+        generateMazeBtn.onClick.RemoveAllListeners();
+        // Sliders:
+        widthSilder.onValueChanged.RemoveAllListeners();
+        heightSilder.onValueChanged.RemoveAllListeners();
+        // Toggle:
+        generationToggle.onValueChanged.RemoveAllListeners();
+    }
 
 }
