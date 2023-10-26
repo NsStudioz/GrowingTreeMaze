@@ -59,6 +59,8 @@ public class UIController : MonoBehaviour
         // Sliders:
         widthSilder.onValueChanged.AddListener(ChangeMazeWidth);
         heightSilder.onValueChanged.AddListener(ChangeMazeHeight);
+        // Toggle:
+        generationToggle.onValueChanged.AddListener(SetGenerationToggle);
     }
 
     #region Buttons:
@@ -114,6 +116,15 @@ public class UIController : MonoBehaviour
 
     #endregion
 
+    #region Toggle:
 
+    private void SetGenerationToggle(bool state)
+    {
+        state = !state;
+        isQuickestGenerate = state;
+        OnGenerationToggleChange?.Invoke(state);
+    }
+
+    #endregion
 
 }
