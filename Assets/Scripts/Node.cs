@@ -9,7 +9,7 @@ public class Node : MonoBehaviour
     private void Awake()
     {
         SetNodeInvisible();
-        InitializeNodeWalls();
+        //InitializeNodeWalls();
     }
 
     private void InitializeNodeWalls()
