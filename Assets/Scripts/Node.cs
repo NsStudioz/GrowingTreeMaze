@@ -8,6 +8,7 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
+        SetNodeInvisible();
         InitializeNodeWalls();
     }
 
@@ -19,4 +20,13 @@ public class Node : MonoBehaviour
             walls[i] = transform.GetChild(i).gameObject;
     }
 
+    public void SetNodeVisible()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void SetNodeInvisible()
+    {
+        gameObject.SetActive(false);
+    }
 }
