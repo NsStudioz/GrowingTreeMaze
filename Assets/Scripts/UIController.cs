@@ -56,6 +56,9 @@ public class UIController : MonoBehaviour
         playBtn.onClick.AddListener(ShowPlayMenu);
         backBtn.onClick.AddListener(ShowMainMenu);
         generateMazeBtn.onClick.AddListener(GenerateTheMaze);
+        // Sliders:
+        widthSilder.onValueChanged.AddListener(ChangeMazeWidth);
+        heightSilder.onValueChanged.AddListener(ChangeMazeHeight);
     }
 
     #region Buttons:
@@ -76,6 +79,37 @@ public class UIController : MonoBehaviour
     private void GenerateTheMaze()
     {
         OnClickGenerateTheMazeButton?.Invoke();
+    }
+
+    #endregion
+
+    #region Sliders:
+
+    private void ChangeMazeWidth(float value) => SetWidth(Mathf.RoundToInt(value));
+
+    private void ChangeMazeHeight(float value) => SetHeight(Mathf.RoundToInt(value));
+
+    private void SetWidth(int width)
+    {
+        widthSilder.value = width;
+        SyncWidthValueText(width);
+        OnWidthValueChange?.Invoke(width);
+    }
+
+    private void SetHeight(int height)
+    {
+        heightSilder.value = height;
+        SyncHeightValueText(height);
+        OnHeightValueChange?.Invoke(height);
+    }
+
+    private void SyncWidthValueText(int width)
+    {
+        widthValueText.text = width.ToString();
+    }
+    private void SyncHeightValueText(int height)
+    {
+        heightValueText.text = height.ToString();
     }
 
     #endregion
