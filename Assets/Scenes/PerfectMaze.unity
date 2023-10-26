@@ -293,6 +293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 1883399109110624822, guid: 9193afa1b1ff3294987056826b66558a, type: 3}
+  gridWidth: 250
+  gridHeight: 250
 --- !u!4 &825793389
 Transform:
   m_ObjectHideFlags: 0
