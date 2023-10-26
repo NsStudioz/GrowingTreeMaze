@@ -50,4 +50,36 @@ public class UIController : MonoBehaviour
         generationToggle.onValueChanged.RemoveAllListeners();
     }
 
+    void Start()
+    {
+        // Buttons:
+        playBtn.onClick.AddListener(ShowPlayMenu);
+        backBtn.onClick.AddListener(ShowMainMenu);
+        generateMazeBtn.onClick.AddListener(GenerateTheMaze);
+    }
+
+    #region Buttons:
+    private void ShowPlayMenu()
+    {
+        MenuPanel.SetActive(false);
+        PlayPanel.SetActive(true);
+        OnClickPlayButton?.Invoke();
+    }
+
+    private void ShowMainMenu()
+    {
+        PlayPanel.SetActive(false);
+        MenuPanel.SetActive(true);
+        OnClickBackButton?.Invoke();
+    }
+
+    private void GenerateTheMaze()
+    {
+        OnClickGenerateTheMazeButton?.Invoke();
+    }
+
+    #endregion
+
+
+
 }
