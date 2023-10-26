@@ -26,6 +26,16 @@ public class UIController : MonoBehaviour
     [SerializeField] private Toggle generationToggle;
     [SerializeField] private bool isQuickestGenerate; // testing the bool is in sync with toggle.
 
+    // Button Events:
+    public static event Action OnClickGenerateTheMazeButton;
+    public static event Action OnClickPlayButton;
+    public static event Action OnClickBackButton;
+    // Silders Events:
+    public static event Action<int> OnWidthValueChange;
+    public static event Action<int> OnHeightValueChange;
+    // Toggle Events:
+    public static event Action<bool> OnGenerationToggleChange;
+
     // Removing all UI listeners.
     private void OnDestroy()
     {
