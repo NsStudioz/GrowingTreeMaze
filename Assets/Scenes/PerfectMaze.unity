@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 825793389}
-  - component: {fileID: 825793388}
+  - component: {fileID: 825793390}
   m_Layer: 0
   m_Name: MazeTester
   m_TagString: Untagged
@@ -280,21 +280,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &825793388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 825793387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbc0e19a56153284ab026e9fb2c7c72c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 1883399109110624822, guid: 9193afa1b1ff3294987056826b66558a, type: 3}
-  gridWidth: 250
-  gridHeight: 250
 --- !u!4 &825793389
 Transform:
   m_ObjectHideFlags: 0
@@ -310,6 +295,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &825793390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825793387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c07ee7c5c052e94aa47c6a2cc339663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodePrefab: {fileID: 1883399109110624822, guid: 9193afa1b1ff3294987056826b66558a, type: 3}
+  gridWidth: 250
+  gridHeight: 250
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
