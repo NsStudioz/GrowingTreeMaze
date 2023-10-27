@@ -14,7 +14,6 @@ public class GrowingTree : MonoBehaviour
     [SerializeField] private int mazeWidth;
     [SerializeField] private int mazeHeight;
 
-    [SerializeField] private bool isQuickestGenerate;
     [SerializeField] private float generationSpeed = 0.01f;
 
     private enum NextNodeIndex
