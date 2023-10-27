@@ -25,5 +25,29 @@ public class GrowingTree : MonoBehaviour
             spawnedNodes[i].SetNodeVisible();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            GenerateTheMaze();
+    }
 
+    private void GenerateTheMaze()
+    {
+        StartCoroutine(GrowingTreeSimulation(mazeWidth, mazeHeight));
+    }
+
+    private IEnumerator GrowingTreeSimulation(int width, int height)
+    {
+        yield return new WaitForSeconds(generationSpeed);
+    }
+
+    private void StopMazeSimulation()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        StopMazeSimulation();
+    }
 }
