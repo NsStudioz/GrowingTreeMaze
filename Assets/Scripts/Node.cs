@@ -14,6 +14,17 @@ public class Node : MonoBehaviour
         ResetWallsState();
     }
 
+    private void ResetWallsState()
+    {
+        foreach (GameObject wall in walls)
+        {
+            if (!wall.gameObject.activeInHierarchy)
+                wall.gameObject.SetActive(true);
+        }
+    }
+
+    #region PublicMethods:
+
     public void SetNodeVisited()
     {
         IsVisited = true;
@@ -38,12 +49,5 @@ public class Node : MonoBehaviour
         walls[index].SetActive(false);
     }
 
-    private void ResetWallsState()
-    {
-        foreach (GameObject wall in walls)
-        {
-            if (!wall.gameObject.activeInHierarchy)
-                wall.gameObject.SetActive(true);
-        }
-    }
+    #endregion
 }
