@@ -1751,6 +1751,7 @@ GameObject:
   - component: {fileID: 825793389}
   - component: {fileID: 825793390}
   - component: {fileID: 825793391}
+  - component: {fileID: 825793392}
   m_Layer: 0
   m_Name: MazeTester
   m_TagString: Untagged
@@ -1795,7 +1796,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825793387}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09c5f807c135f004e933c0a2570b8a97, type: 3}
   m_Name: 
@@ -1805,6 +1806,24 @@ MonoBehaviour:
   grid: {fileID: 825793390}
   timer: 2
   mode: 1
+--- !u!114 &825793392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825793387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49a6229e478add439f51af73d218abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 825793390}
+  timer: 2
+  totalNodes: []
+  visitedNodes: []
+  mazeWidth: 10
+  mazeHeight: 10
 --- !u!1 &918428644
 GameObject:
   m_ObjectHideFlags: 0

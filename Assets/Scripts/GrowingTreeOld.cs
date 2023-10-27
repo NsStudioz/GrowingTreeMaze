@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
-public class GrowingTree : MonoBehaviour
+public class GrowingTreeOld : MonoBehaviour
 {
     [SerializeField] private List<Node> SpawnedNodes = new List<Node>();
     [SerializeField] private List<Node> Nodes = new List<Node>();
