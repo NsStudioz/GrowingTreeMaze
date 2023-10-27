@@ -6,18 +6,21 @@ public class Node : MonoBehaviour
 {
     [SerializeField] private GameObject[] walls;
 
+    public bool IsVisited {  get; private set; }
+
     private void Awake()
     {
         SetNodeInvisible();
-        //InitializeNodeWalls();
+        ResetWallsState();
     }
 
-    private void InitializeNodeWalls()
+    public void SetNodeVisited()
     {
-        walls = new GameObject[transform.childCount];
-
-        for (int i = 0; i < walls.Length; i++)
-            walls[i] = transform.GetChild(i).gameObject;
+        IsVisited = true;
+    }
+    public void SetNodeUnvisited()
+    {
+        IsVisited = false;
     }
 
     public void SetNodeVisible()
@@ -28,5 +31,19 @@ public class Node : MonoBehaviour
     public void SetNodeInvisible()
     {
         gameObject.SetActive(false);
+    }
+
+    public void RemoveWall(int index)
+    {
+        walls[index].SetActive(false);
+    }
+
+    private void ResetWallsState()
+    {
+        foreach (GameObject wall in walls)
+        {
+            if (!wall.gameObject.activeInHierarchy)
+                wall.gameObject.SetActive(true);
+        }
     }
 }
