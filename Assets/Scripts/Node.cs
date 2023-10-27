@@ -8,6 +8,18 @@ public class Node : MonoBehaviour
 
     public bool IsVisited {  get; private set; }
 
+    [SerializeField] private bool visited = false;
+
+    public void SetNodeVisit()
+    {
+        visited = true;
+    }
+
+    public bool GetNodeVisit()
+    {
+        return visited;
+    }
+
     private void Awake()
     {
         SetNodeInvisible();
