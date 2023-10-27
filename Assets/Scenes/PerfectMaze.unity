@@ -1752,6 +1752,7 @@ GameObject:
   - component: {fileID: 825793390}
   - component: {fileID: 825793391}
   - component: {fileID: 825793392}
+  - component: {fileID: 825793393}
   m_Layer: 0
   m_Name: MazeTester
   m_TagString: Untagged
@@ -1787,8 +1788,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 1883399109110624822, guid: 9193afa1b1ff3294987056826b66558a, type: 3}
-  gridWidth: 10
-  gridHeight: 10
+  gridWidth: 20
+  gridHeight: 20
 --- !u!114 &825793391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1813,7 +1814,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825793387}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d49a6229e478add439f51af73d218abd, type: 3}
   m_Name: 
@@ -1824,6 +1825,25 @@ MonoBehaviour:
   visitedNodes: []
   mazeWidth: 10
   mazeHeight: 10
+--- !u!114 &825793393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825793387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e9361fd33c54d4ca24ae915214a816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 825793390}
+  spawnedNodes: []
+  nodes: []
+  mazeWidth: 20
+  mazeHeight: 20
+  isQuickestGenerate: 0
+  generationSpeed: 0.001
 --- !u!1 &918428644
 GameObject:
   m_ObjectHideFlags: 0
