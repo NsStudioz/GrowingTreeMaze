@@ -26,6 +26,10 @@ public class GrowingTree : MonoBehaviour
 
     [SerializeField] private NextNodeIndex nextIndexMode = NextNodeIndex.Newest;
 
+    /// <summary>
+    /// Choose a prim's generation approach (Random) or Backtracker approach (Newest), or randomized both (Split)
+    /// </summary>
+    /// <returns></returns>
     private int GetNextIndex()
     {
         int index = 0;
@@ -72,8 +76,11 @@ public class GrowingTree : MonoBehaviour
         StartCoroutine(GrowingTreeSimulation());
     }
 
+
+    #region GrowingTreeAlgorithm:
+
     /// <summary>
-    /// Maze Simulation using the Growing Tree Algorithm.
+    /// Maze Simulation using the Growing Tree Algorithm. Until the list is empty, keep looping
     /// </summary>
     /// <returns></returns>
     private IEnumerator GrowingTreeSimulation()
@@ -187,6 +194,8 @@ public class GrowingTree : MonoBehaviour
         currentNode.RemoveWall((int)dir);
         nextNode.RemoveWall((int)Directions.Opposite(dir));
     }
+
+    #endregion
 
     private void StopMazeSimulation()
     {

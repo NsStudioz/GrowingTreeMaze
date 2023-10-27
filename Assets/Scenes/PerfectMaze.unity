@@ -1844,7 +1844,7 @@ MonoBehaviour:
   mazeHeight: 20
   isQuickestGenerate: 0
   generationSpeed: 0.000001
-  nextIndexMode: 1
+  nextIndexMode: 0
 --- !u!1 &918428644
 GameObject:
   m_ObjectHideFlags: 0
