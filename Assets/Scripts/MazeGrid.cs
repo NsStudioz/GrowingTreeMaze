@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class MazeGrid : MonoBehaviour
 {
-    /*    private int width;
-        private int height;
-
-        public MazeGrid(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
-        }*/
 
     [SerializeField] private Node nodePrefab;
 
