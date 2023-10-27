@@ -17,6 +17,35 @@ public class GrowingTree : MonoBehaviour
     [SerializeField] private bool isQuickestGenerate;
     [SerializeField] private float generationSpeed = 0.01f;
 
+    private enum NextNodeIndex
+    {
+        Random,
+        Newest,
+        Split // 50/50
+    }
+
+    [SerializeField] private NextNodeIndex nextIndexMode = NextNodeIndex.Newest;
+
+    private int GetNextIndex()
+    {
+        int index = 0;
+
+        switch (nextIndexMode)
+        {
+            case NextNodeIndex.Random:
+                index = Random.Range(0, nodes.Count - 1);
+                break;
+            case NextNodeIndex.Newest:
+                index = nodes.Count - 1;
+                break;
+            case NextNodeIndex.Split:
+                index = (Random.value > 0.5f ? Random.Range(0, nodes.Count) : nodes.Count - 1);
+                break;
+        }
+
+        return index;
+    }
+
     private void Start()
     {
         spawnedNodes = grid.GetNodeGrid();
@@ -56,7 +85,7 @@ public class GrowingTree : MonoBehaviour
             List<Direction> possibleDirections = new List<Direction>();
 
             // Node to use for work:
-            int chosenNodeIndex = Random.Range(0, nodes.Count - 1);
+            int chosenNodeIndex = GetNextIndex();
 
             // check for possible cell neighbours next to the pointed cell:
             FindRelatives(spawnedNodes.IndexOf(nodes[chosenNodeIndex]), possibleDirections, possibleRelatives);
