@@ -27,6 +27,12 @@ namespace PerfectMazeProject.Grid
             return nodeGridList;
         }
 
+        public void ClearCellGrid(List<Node> nodeGridList) 
+        {
+            for (int i = 0; i < nodeGridList.Count; i++)
+                Destroy(nodeGridList[i].gameObject);
+        }
+
         private Node SpawnNewCellInstance(Node prefab, Vector3 cellPos)
         {
             return Instantiate(prefab, cellPos, Quaternion.identity);
