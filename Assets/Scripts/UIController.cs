@@ -58,7 +58,6 @@ public class UIController : MonoBehaviour
         generationMode.value = index;
         generationModeText.text = generationMode.options[index].text;
         OnDropdownValueChange?.Invoke(index);
-        Debug.Log(generationMode.value);
     }
 
     private void InitializeWidthAndHeightValues(int width, int height)
