@@ -13,6 +13,7 @@ namespace PerfectMazeProject.Grid
         public int gridHeight { get; private set; }
 
         #region EventListeners:
+
         private void Start()
         {
             UIController.OnWidthValueChange += ChangeGridWidth;

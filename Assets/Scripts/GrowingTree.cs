@@ -97,10 +97,13 @@ public class GrowingTree : MonoBehaviour
     }
 
     /// <summary>
-    /// Make a list of nodes, spawn and populate them on the map and make sure all of their walls are visible. 
+    /// Make a list of nodes, spawn and populate them on the map based on the grid's width and height and make sure all of their walls are visible. 
     /// </summary>
     private void Initialize()
     {
+        mazeWidth = grid.gridWidth;
+        mazeHeight = grid.gridHeight;
+
         spawnedNodes = grid.GetNodeGrid();
 
         for (int i = 0; i < spawnedNodes.Count; i++)
