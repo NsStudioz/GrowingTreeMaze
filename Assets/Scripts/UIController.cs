@@ -24,8 +24,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private Button backBtn;
     [SerializeField] private Button generateMazeBtn;
 
-    [Header("Toggle")]
-    [SerializeField] private Toggle generationToggle;
 
     // Button Events:
     public static event Action OnClickGenerateTheMazeButton;
@@ -35,7 +33,7 @@ public class UIController : MonoBehaviour
     public static event Action<int> OnWidthValueChange;
     public static event Action<int> OnHeightValueChange;
     // Toggle Events:
-    public static event Action<bool> OnGenerationToggleChange;
+    public static event Action<bool> OnDropdownValueChange;
 
     void Awake()
     {
@@ -47,7 +45,7 @@ public class UIController : MonoBehaviour
         widthSilder.onValueChanged.AddListener(ChangeMazeWidth);
         heightSilder.onValueChanged.AddListener(ChangeMazeHeight);
         // Toggle:
-        generationToggle.onValueChanged.AddListener(SetGenerationToggle);
+
     }
 
     private void InitializeWidthAndHeightValues(int width, int height)
@@ -111,10 +109,6 @@ public class UIController : MonoBehaviour
 
     #region Toggle:
 
-    private void SetGenerationToggle(bool state)
-    {
-
-    }
 
     #endregion
 
@@ -130,7 +124,7 @@ public class UIController : MonoBehaviour
         widthSilder.onValueChanged.RemoveAllListeners();
         heightSilder.onValueChanged.RemoveAllListeners();
         // Toggle:
-        generationToggle.onValueChanged.RemoveAllListeners();
+
     }
 
 }
