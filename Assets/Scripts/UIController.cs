@@ -16,6 +16,8 @@ public class UIController : MonoBehaviour
     [Header("Sliders")]
     [SerializeField] private Slider widthSilder;
     [SerializeField] private Slider heightSilder;
+    private int initialWidth = 50;
+    private int initialHeight = 50;
 
     [Header("Buttons")]
     [SerializeField] private Button playBtn;
@@ -24,7 +26,6 @@ public class UIController : MonoBehaviour
 
     [Header("Toggle")]
     [SerializeField] private Toggle generationToggle;
-    [SerializeField] private bool isQuickestGenerate; // testing the bool is in sync with toggle.
 
     // Button Events:
     public static event Action OnClickGenerateTheMazeButton;
@@ -36,7 +37,7 @@ public class UIController : MonoBehaviour
     // Toggle Events:
     public static event Action<bool> OnGenerationToggleChange;
 
-    void Start()
+    void Awake()
     {
         // Buttons:
         playBtn.onClick.AddListener(ShowPlayMenu);
@@ -49,12 +50,18 @@ public class UIController : MonoBehaviour
         generationToggle.onValueChanged.AddListener(SetGenerationToggle);
     }
 
+    private void InitializeWidthAndHeightValues(int width, int height)
+    {
+        OnWidthValueChange?.Invoke(width);
+        OnHeightValueChange?.Invoke(height);
+    }
+
     #region Buttons:
     private void ShowPlayMenu()
     {
         MenuPanel.SetActive(false);
         PlayPanel.SetActive(true);
-        OnClickPlayButton?.Invoke();
+        InitializeWidthAndHeightValues(initialWidth, initialHeight);
     }
 
     private void ShowMainMenu()
@@ -106,9 +113,7 @@ public class UIController : MonoBehaviour
 
     private void SetGenerationToggle(bool state)
     {
-        state = !state;
-        isQuickestGenerate = state;
-        OnGenerationToggleChange?.Invoke(state);
+
     }
 
     #endregion

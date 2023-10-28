@@ -9,8 +9,32 @@ namespace PerfectMazeProject.Grid
 
         [SerializeField] private Node nodePrefab;
 
-        [SerializeField] private int gridWidth;
-        [SerializeField] private int gridHeight;
+        public int gridWidth {  get; private set; }
+        public int gridHeight { get; private set; }
+
+        #region EventListeners:
+        private void Start()
+        {
+            UIController.OnWidthValueChange += ChangeGridWidth;
+            UIController.OnHeightValueChange += ChangeGridHeight;
+        }
+
+        private void OnDestroy()
+        {
+            UIController.OnWidthValueChange -= ChangeGridWidth;
+            UIController.OnHeightValueChange -= ChangeGridHeight;
+        }
+
+        private void ChangeGridWidth(int value)
+        {
+            gridWidth = value;
+        }
+        private void ChangeGridHeight(int value)
+        {
+            gridHeight = value;
+        }
+
+        #endregion
 
         public List<Node> GetNodeGrid()
         {
