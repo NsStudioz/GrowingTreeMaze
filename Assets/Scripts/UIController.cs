@@ -53,7 +53,9 @@ public class UIController : MonoBehaviour
     private void InitializeWidthAndHeightValues(int width, int height)
     {
         OnWidthValueChange?.Invoke(width);
+        SyncWidthValueText(width);
         OnHeightValueChange?.Invoke(height);
+        SyncHeightValueText(height);
     }
 
     #region Buttons:
