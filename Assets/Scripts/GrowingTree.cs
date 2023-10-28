@@ -26,7 +26,7 @@ public class GrowingTree : MonoBehaviour
     [SerializeField] private NextNodeIndex nextIndexMode = NextNodeIndex.Newest;
 
     /// <summary>
-    /// Choose a prim's generation approach (Random) or Backtracker approach (Newest), or randomized both (Split)
+    /// Choose a prim's generation approach (Random), a Backtracker approach (Newest), or randomized both (Split)
     /// </summary>
     /// <returns></returns>
     private int GetNextIndex()
@@ -49,31 +49,73 @@ public class GrowingTree : MonoBehaviour
         return index;
     }
 
-    private void Start()
+    private void ResetMaze()
     {
-        spawnedNodes = grid.GetNodeGrid();
+        if (spawnedNodes.Count > 0)
+        {
+            StopMazeSimulation();
 
-        for (int i = 0; i < spawnedNodes.Count; i++)
-            spawnedNodes[i].SetNodeVisible();
+            ClearGrid();
+        }
     }
 
-    private void Update()
+    /// <summary>
+    /// Clear the grid and destroy nodes
+    /// </summary>
+    private void ClearGrid()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            GenerateTheMaze();
+        grid.ClearCellGrid(spawnedNodes);
 
-        if (Input.GetKeyDown(KeyCode.S))
-            StopMazeSimulation();
+        spawnedNodes.Clear();
+        nodes.Clear();
     }
 
     private void GenerateTheMaze()
     {
-        int chosenNodeIndex = Random.Range(0, spawnedNodes.Count);
-        nodes.Add(spawnedNodes[chosenNodeIndex]);
-        nodes[0].SetNodeVisited();
+        Initialize();
+
+        SetFirstRandomIndex();
 
         StartCoroutine(GrowingTreeSimulation());
     }
+
+    /// <summary>
+    /// Make a list of nodes, spawn and populate them on the map and make sure all of their walls are visible. 
+    /// </summary>
+    private void Initialize()
+    {
+        spawnedNodes = grid.GetNodeGrid();
+
+        for (int i = 0; i < spawnedNodes.Count; i++)
+            spawnedNodes[i].ResetWallsState();
+    }
+
+    /// <summary>
+    /// Pick a node randomly to start working on when generating the maze
+    /// </summary>
+    private void SetFirstRandomIndex()
+    {
+        int chosenNodeIndex = Random.Range(0, spawnedNodes.Count);
+        nodes.Add(spawnedNodes[chosenNodeIndex]);
+        nodes[0].SetNodeVisited();
+    }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetMaze();
+
+            GenerateTheMaze();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ResetMaze();
+        }
+    }
+#endif
 
 
     #region GrowingTreeAlgorithm:
@@ -196,13 +238,16 @@ public class GrowingTree : MonoBehaviour
 
     #endregion
 
+    /// <summary>
+    /// Stop the maze generation entirely
+    /// </summary>
     private void StopMazeSimulation()
     {
         StopAllCoroutines();
     }
 
-/*    private void OnDestroy()
+    private void OnDestroy()
     {
         StopMazeSimulation();
-    }*/
+    }
 }

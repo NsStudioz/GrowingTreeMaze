@@ -1842,8 +1842,7 @@ MonoBehaviour:
   nodes: []
   mazeWidth: 20
   mazeHeight: 20
-  isQuickestGenerate: 0
-  generationSpeed: 0.000001
+  generationSpeed: 0.01
   nextIndexMode: 0
 --- !u!1 &918428644
 GameObject:
@@ -3560,7 +3559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.25, y: 1}
-  m_AnchoredPosition: {x: 4, y: 0}
+  m_AnchoredPosition: {x: 4.0000076, y: 0}
   m_SizeDelta: {x: 8, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1949570805
