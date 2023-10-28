@@ -49,11 +49,17 @@ public class GrowingTree : MonoBehaviour
         return index;
     }
 
-    
+    private void ChangeNextIndexMode(int index)
+    {
+        nextIndexMode = (NextNodeIndex)index;
+    }
+
+
     private void Awake()
     {
         UIController.OnClickGenerateTheMazeButton += StartSimulation;
         UIController.OnClickBackButton += ResetMaze;
+        UIController.OnDropdownValueChange += ChangeNextIndexMode;
     }
 
     /// <summary>
@@ -271,5 +277,6 @@ public class GrowingTree : MonoBehaviour
         StopMazeSimulation();
         UIController.OnClickGenerateTheMazeButton -= StartSimulation;
         UIController.OnClickBackButton -= ResetMaze;
+        UIController.OnDropdownValueChange -= ChangeNextIndexMode;
     }
 }

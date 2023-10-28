@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private Button backBtn;
     [SerializeField] private Button generateMazeBtn;
 
+    [Header("Dropdown")]
+    [SerializeField] private TMP_Dropdown generationMode;
+    
+    [SerializeField] private TMP_Text generationModeText;
 
     // Button Events:
     public static event Action OnClickGenerateTheMazeButton;
@@ -32,8 +37,8 @@ public class UIController : MonoBehaviour
     // Silders Events:
     public static event Action<int> OnWidthValueChange;
     public static event Action<int> OnHeightValueChange;
-    // Toggle Events:
-    public static event Action<bool> OnDropdownValueChange;
+    // Dropdown Events:
+    public static event Action<int> OnDropdownValueChange;
 
     void Awake()
     {
@@ -44,8 +49,16 @@ public class UIController : MonoBehaviour
         // Sliders:
         widthSilder.onValueChanged.AddListener(ChangeMazeWidth);
         heightSilder.onValueChanged.AddListener(ChangeMazeHeight);
-        // Toggle:
+        // Dropdown:
+        generationMode.onValueChanged.AddListener(ChangeGenerationMode);
+    }
 
+    private void ChangeGenerationMode(int index)
+    {
+        generationMode.value = index;
+        generationModeText.text = generationMode.options[index].text;
+        OnDropdownValueChange?.Invoke(index);
+        Debug.Log(generationMode.value);
     }
 
     private void InitializeWidthAndHeightValues(int width, int height)
@@ -60,6 +73,7 @@ public class UIController : MonoBehaviour
         MenuPanel.SetActive(false);
         PlayPanel.SetActive(true);
         InitializeWidthAndHeightValues(initialWidth, initialHeight);
+        ChangeGenerationMode(0);
     }
 
     private void ShowMainMenu()
@@ -124,7 +138,7 @@ public class UIController : MonoBehaviour
         widthSilder.onValueChanged.RemoveAllListeners();
         heightSilder.onValueChanged.RemoveAllListeners();
         // Toggle:
-
+        generationMode.onValueChanged.RemoveAllListeners();
     }
 
 }
