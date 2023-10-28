@@ -39,6 +39,10 @@ namespace PerfectMazeProject.Grid
 
         #region PublicMethods
 
+        /// <summary>
+        /// node list getter. positioning every created node, setting it as child to this parent gameobject and adding it to the list.
+        /// </summary>
+        /// <returns></returns>
         public List<Node> GetNodeGrid()
         {
             List<Node> nodeGridList = new List<Node>();
@@ -54,6 +58,10 @@ namespace PerfectMazeProject.Grid
             return nodeGridList;
         }
 
+        /// <summary>
+        /// Destroy all nodes in scene, clearing the grid
+        /// </summary>
+        /// <param name="nodeGridList"></param>
         public void ClearCellGrid(List<Node> nodeGridList) 
         {
             for (int i = 0; i < nodeGridList.Count; i++)

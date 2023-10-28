@@ -31,7 +31,6 @@ public class UIController : MonoBehaviour
 
     // Button Events:
     public static event Action OnClickGenerateTheMazeButton;
-    public static event Action OnClickPlayButton;
     public static event Action OnClickBackButton;
     // Silders Events:
     public static event Action<int> OnWidthValueChange;
@@ -69,6 +68,10 @@ public class UIController : MonoBehaviour
     #endregion
 
     #region Buttons:
+
+    /// <summary>
+    /// Show gameplay menu UI
+    /// </summary>
     private void ShowPlayMenu()
     {
         MenuPanel.SetActive(false);
@@ -77,6 +80,9 @@ public class UIController : MonoBehaviour
         ChangeGenerationMode(0);
     }
 
+    /// <summary>
+    /// Show main menu UI
+    /// </summary>
     private void ShowMainMenu()
     {
         PlayPanel.SetActive(false);
@@ -84,6 +90,9 @@ public class UIController : MonoBehaviour
         OnClickBackButton?.Invoke();
     }
 
+    /// <summary>
+    /// Start maze simulation
+    /// </summary>
     private void GenerateTheMaze()
     {
         OnClickGenerateTheMazeButton?.Invoke();
@@ -93,16 +102,33 @@ public class UIController : MonoBehaviour
 
     #region Sliders:
 
+    /// <summary>
+    /// On Gameplay menu UI, show default maze grid slider values
+    /// </summary>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
     private void InitializeWidthAndHeightValues(int width, int height)
     {
         SetWidth(width);
         SetHeight(height);
     }
 
+    /// <summary>
+    /// Change maze grid size (width)
+    /// </summary>
+    /// <param name="value"></param>
     private void ChangeMazeWidth(float value) => SetWidth(Mathf.RoundToInt(value));
 
+    /// <summary>
+    /// Change maze grid size (height)
+    /// </summary>
+    /// <param name="value"></param>
     private void ChangeMazeHeight(float value) => SetHeight(Mathf.RoundToInt(value));
 
+    /// <summary>
+    /// Update slider value, text and Invoke an event
+    /// </summary>
+    /// <param name="width"></param>
     private void SetWidth(int width)
     {
         widthSilder.value = width;
@@ -110,6 +136,10 @@ public class UIController : MonoBehaviour
         OnWidthValueChange?.Invoke(width);
     }
 
+    /// <summary>
+    /// Update slider value, text and Invoke an event
+    /// </summary>
+    /// <param name="height"></param>
     private void SetHeight(int height)
     {
         heightSilder.value = height;
@@ -130,6 +160,10 @@ public class UIController : MonoBehaviour
 
     #region Dropdown:
 
+    /// <summary>
+    /// Update dropdown value, text, and invoke an event
+    /// </summary>
+    /// <param name="index"></param>
     private void ChangeGenerationMode(int index)
     {
         generationMode.value = index;
