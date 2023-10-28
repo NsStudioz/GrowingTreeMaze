@@ -53,19 +53,6 @@ public class UIController : MonoBehaviour
         generationMode.onValueChanged.AddListener(ChangeGenerationMode);
     }
 
-    private void ChangeGenerationMode(int index)
-    {
-        generationMode.value = index;
-        generationModeText.text = generationMode.options[index].text;
-        OnDropdownValueChange?.Invoke(index);
-    }
-
-    private void InitializeWidthAndHeightValues(int width, int height)
-    {
-        SetWidth(width);
-        SetHeight(height);
-    }
-
     #region Buttons:
     private void ShowPlayMenu()
     {
@@ -90,6 +77,12 @@ public class UIController : MonoBehaviour
     #endregion
 
     #region Sliders:
+
+    private void InitializeWidthAndHeightValues(int width, int height)
+    {
+        SetWidth(width);
+        SetHeight(height);
+    }
 
     private void ChangeMazeWidth(float value) => SetWidth(Mathf.RoundToInt(value));
 
@@ -120,11 +113,16 @@ public class UIController : MonoBehaviour
 
     #endregion
 
-    #region Toggle:
+    #region Dropdown:
 
+    private void ChangeGenerationMode(int index)
+    {
+        generationMode.value = index;
+        generationModeText.text = generationMode.options[index].text;
+        OnDropdownValueChange?.Invoke(index);
+    }
 
     #endregion
-
 
     // Removing all UI listeners.
     private void OnDestroy()
@@ -139,5 +137,4 @@ public class UIController : MonoBehaviour
         // Toggle:
         generationMode.onValueChanged.RemoveAllListeners();
     }
-
 }
