@@ -1928,7 +1928,7 @@ MonoBehaviour:
   nodes: []
   mazeWidth: 20
   mazeHeight: 20
-  generationSpeed: 0.01
+  generationSpeed: 0.0001
   nextIndexMode: 0
 --- !u!1 &918428644
 GameObject:

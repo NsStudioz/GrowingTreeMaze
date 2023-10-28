@@ -27,7 +27,6 @@ public class UIController : MonoBehaviour
 
     [Header("Dropdown")]
     [SerializeField] private TMP_Dropdown generationMode;
-    
     [SerializeField] private TMP_Text generationModeText;
 
     // Button Events:
@@ -40,6 +39,7 @@ public class UIController : MonoBehaviour
     // Dropdown Events:
     public static event Action<int> OnDropdownValueChange;
 
+    #region EventListeners
     void Awake()
     {
         // Buttons:
@@ -52,6 +52,21 @@ public class UIController : MonoBehaviour
         // Dropdown:
         generationMode.onValueChanged.AddListener(ChangeGenerationMode);
     }
+
+    // Removing all UI listeners.
+    private void OnDestroy()
+    {
+        // Buttons:
+        playBtn.onClick.RemoveAllListeners();
+        backBtn.onClick.RemoveAllListeners();
+        generateMazeBtn.onClick.RemoveAllListeners();
+        // Sliders:
+        widthSilder.onValueChanged.RemoveAllListeners();
+        heightSilder.onValueChanged.RemoveAllListeners();
+        // Toggle:
+        generationMode.onValueChanged.RemoveAllListeners();
+    }
+    #endregion
 
     #region Buttons:
     private void ShowPlayMenu()
@@ -124,17 +139,5 @@ public class UIController : MonoBehaviour
 
     #endregion
 
-    // Removing all UI listeners.
-    private void OnDestroy()
-    {
-        // Buttons:
-        playBtn.onClick.RemoveAllListeners();
-        backBtn.onClick.RemoveAllListeners();
-        generateMazeBtn.onClick.RemoveAllListeners();
-        // Sliders:
-        widthSilder.onValueChanged.RemoveAllListeners();
-        heightSilder.onValueChanged.RemoveAllListeners();
-        // Toggle:
-        generationMode.onValueChanged.RemoveAllListeners();
-    }
+
 }

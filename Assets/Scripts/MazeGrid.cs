@@ -37,6 +37,8 @@ namespace PerfectMazeProject.Grid
 
         #endregion
 
+        #region PublicMethods
+
         public List<Node> GetNodeGrid()
         {
             List<Node> nodeGridList = new List<Node>();
@@ -58,6 +60,10 @@ namespace PerfectMazeProject.Grid
                 Destroy(nodeGridList[i].gameObject);
         }
 
+        #endregion
+
+        #region PrivateMethods
+
         private Node SpawnNewCellInstance(Node prefab, Vector3 cellPos)
         {
             return Instantiate(prefab, cellPos, Quaternion.identity);
@@ -73,6 +79,8 @@ namespace PerfectMazeProject.Grid
         {
             prefab.transform.parent = parent;
         }
+
+        #endregion
     }
 }
 

@@ -14,7 +14,7 @@ public class GrowingTree : MonoBehaviour
     [SerializeField] private int mazeWidth;
     [SerializeField] private int mazeHeight;
 
-    [SerializeField] private float generationSpeed = 0.01f;
+    [SerializeField] private float generationSpeed = 0.0001f;
 
     private enum NextNodeIndex
     {
@@ -49,12 +49,16 @@ public class GrowingTree : MonoBehaviour
         return index;
     }
 
+    /// <summary>
+    /// Event listener, will change based on UI dropdown state
+    /// </summary>
+    /// <param name="index"></param>
     private void ChangeNextIndexMode(int index)
     {
         nextIndexMode = (NextNodeIndex)index;
     }
 
-
+    #region EventListeners:
     private void Awake()
     {
         UIController.OnClickGenerateTheMazeButton += StartSimulation;
@@ -62,6 +66,16 @@ public class GrowingTree : MonoBehaviour
         UIController.OnDropdownValueChange += ChangeNextIndexMode;
     }
 
+    private void OnDestroy()
+    {
+        StopMazeSimulation();
+        UIController.OnClickGenerateTheMazeButton -= StartSimulation;
+        UIController.OnClickBackButton -= ResetMaze;
+        UIController.OnDropdownValueChange -= ChangeNextIndexMode;
+    }
+    #endregion
+
+    #region MazeSimulationSetup:
     /// <summary>
     /// Event listener to start the maze generation simulation
     /// </summary>
@@ -72,6 +86,9 @@ public class GrowingTree : MonoBehaviour
         GenerateTheMaze();
     }
 
+    /// <summary>
+    /// Stop maze simulation and clear maze grid
+    /// </summary>
     private void ResetMaze()
     {
         if (spawnedNodes.Count > 0)
@@ -93,6 +110,9 @@ public class GrowingTree : MonoBehaviour
         nodes.Clear();
     }
 
+    /// <summary>
+    /// Begin Maze Simulation
+    /// </summary>
     private void GenerateTheMaze()
     {
         Initialize();
@@ -126,28 +146,12 @@ public class GrowingTree : MonoBehaviour
         nodes[0].SetNodeVisited();
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetMaze();
-
-            GenerateTheMaze();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            ResetMaze();
-        }
-    }
-#endif
-
+    #endregion
 
     #region GrowingTreeAlgorithm:
 
     /// <summary>
-    /// Maze Simulation using the Growing Tree Algorithm. Until the list is empty, keep looping
+    /// Maze Simulation using the Growing Tree Algorithm. Until the list is empty, keep looping and carve a path
     /// </summary>
     /// <returns></returns>
     private IEnumerator GrowingTreeSimulation()
@@ -270,13 +274,5 @@ public class GrowingTree : MonoBehaviour
     private void StopMazeSimulation()
     {
         StopAllCoroutines();
-    }
-
-    private void OnDestroy()
-    {
-        StopMazeSimulation();
-        UIController.OnClickGenerateTheMazeButton -= StartSimulation;
-        UIController.OnClickBackButton -= ResetMaze;
-        UIController.OnDropdownValueChange -= ChangeNextIndexMode;
     }
 }
