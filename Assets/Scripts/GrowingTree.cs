@@ -49,6 +49,23 @@ public class GrowingTree : MonoBehaviour
         return index;
     }
 
+    
+    private void Awake()
+    {
+        UIController.OnClickGenerateTheMazeButton += StartSimulation;
+        UIController.OnClickBackButton += ResetMaze;
+    }
+
+    /// <summary>
+    /// Event listener to start the maze generation simulation
+    /// </summary>
+    private void StartSimulation()
+    {
+        ResetMaze();
+
+        GenerateTheMaze();
+    }
+
     private void ResetMaze()
     {
         if (spawnedNodes.Count > 0)
@@ -249,5 +266,7 @@ public class GrowingTree : MonoBehaviour
     private void OnDestroy()
     {
         StopMazeSimulation();
+        UIController.OnClickGenerateTheMazeButton -= StartSimulation;
+        UIController.OnClickBackButton -= ResetMaze;
     }
 }
