@@ -20,8 +20,8 @@ namespace PerfectMazeProject.Camera
         private bool isZoomPointerDown;
 
         // Camera Clamping limits:
-        private int XZminValue = -50;
-        private int XZmaxValue = 300;
+        private int XZminValue = -100;
+        private int XZmaxValue = 250;
         private int YminValue = -125;
         private int YmaxValue = 100;
 
@@ -69,18 +69,14 @@ namespace PerfectMazeProject.Camera
 
         private void Update()
         {
-
 #if PLATFORM_STANDALONE_WIN || UNITY_EDITOR
             HandleMovement();
 #endif
-
+            // Mobile controls:
             MoveCameraWithPointers();
             ZoomCameraWithPointers();
             ClampCameraPositions();
-
         }
-
-
 
         #region PC_Controls:
 
@@ -95,19 +91,19 @@ namespace PerfectMazeProject.Camera
         private void HandleMovementHorizontal()
         {
             if (Input.GetKey(KeyCode.D))
-                cameraPos += transform.right * movementSpeed * Time.deltaTime;
+                cameraPos += transform.right * MovementSpeed();
 
             else if (Input.GetKey(KeyCode.A))
-                cameraPos += transform.right * -movementSpeed * Time.deltaTime;
+                cameraPos += transform.right * -MovementSpeed();
         }
 
         private void HandleMovementVertical()
         {
             if (Input.GetKey(KeyCode.W))
-                cameraPos += transform.forward * movementSpeed * Time.deltaTime;
+                cameraPos += transform.forward * MovementSpeed();
 
             else if (Input.GetKey(KeyCode.S))
-                cameraPos += transform.forward * -movementSpeed * Time.deltaTime;
+                cameraPos += transform.forward * -MovementSpeed();
         }
 
 
