@@ -300,6 +300,12 @@ MonoBehaviour:
   - {fileID: 2606107788030347052}
   - {fileID: 2606107788009180983}
   - {fileID: 2606107788546978457}
+  rendererWalls:
+  - {fileID: 2606107787443378716}
+  - {fileID: 2606107788030347041}
+  - {fileID: 2606107788009180968}
+  - {fileID: 2606107788546978458}
+  rendererGround: {fileID: 4581193168609829604}
 --- !u!1 &2606107788030347052
 GameObject:
   m_ObjectHideFlags: 0

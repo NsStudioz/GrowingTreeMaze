@@ -145,9 +145,6 @@ public class GrowingTree : MonoBehaviour
         mazeHeight = MazeGrid.instance.gridHeight;
 
         spawnedNodes = MazeGrid.instance.GetNodeGridCoroutine();
-
-        for (int i = 0; i < spawnedNodes.Count; i++)
-            spawnedNodes[i].ResetWallsState();
     }
 
     /// <summary>
@@ -187,6 +184,9 @@ public class GrowingTree : MonoBehaviour
 
             yield return new WaitForSeconds(generationSpeed);
         }
+
+        for (int i = 0; i < spawnedNodes.Count; i++)
+            spawnedNodes[i].SetNodeCompleteColor();
     }
 
     /// <summary>
@@ -197,9 +197,10 @@ public class GrowingTree : MonoBehaviour
     /// <param name="index"></param>
     private void FindRelatives(int index, List<Direction> possibleDirections, List<int> possibleRelatives)
     {
-        // Calculate the indexes, we use - 1 since it shouldn't count up to max number of height.
-        int cellX = index / mazeHeight; // example: 46 / 10 (height) = 4 (int). denominates float.
-        int cellY = index % mazeHeight; // example: 46 % 10 = 6 remainder of height.
+        // Calculate the indexes based on the height,
+        // we use - 1 so it won't count up to max number of height.
+        int cellX = index / mazeHeight;
+        int cellY = index % mazeHeight;
 
         // Check above relative: 
         if (cellY < mazeHeight - 1) 
@@ -228,6 +229,7 @@ public class GrowingTree : MonoBehaviour
         {
             possibleDirections.Add(dir);
             possibleRelatives.Add(index);
+            spawnedNodes[index].SetNodeRelativeFoundColor();
         }
     }
 
