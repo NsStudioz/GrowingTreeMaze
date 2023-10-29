@@ -8,6 +8,8 @@ public class GrowingTree : MonoBehaviour
 {
     private static GrowingTree instance;
 
+    [SerializeField] private GameAudio gameAudio;
+
     [SerializeField] private List<Node> spawnedNodes = new List<Node>();
     [SerializeField] private List<Node> nodes = new List<Node>();
 
@@ -185,6 +187,7 @@ public class GrowingTree : MonoBehaviour
             yield return new WaitForSeconds(generationSpeed);
         }
 
+        gameAudio.PlayClip();
         for (int i = 0; i < spawnedNodes.Count; i++)
             spawnedNodes[i].SetNodeCompleteColor();
     }

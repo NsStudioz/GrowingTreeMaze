@@ -10,6 +10,7 @@ namespace PerfectMazeProject.Grid
         public static MazeGrid instance;
 
         [SerializeField] private Node nodePrefab;
+        [SerializeField] private GameAudio gameAudio;
 
         public int gridWidth {  get; private set; }
         public int gridHeight { get; private set; }
@@ -63,7 +64,7 @@ namespace PerfectMazeProject.Grid
         {
             List<Node> nodeGridList = new List<Node>();
 
-            StartCoroutine(CreateGrid(nodeGridList));
+            StartCoroutine(CreateGrid(nodeGridList, gridWidth, gridHeight));
 
             return nodeGridList;
         }
@@ -73,16 +74,20 @@ namespace PerfectMazeProject.Grid
         /// </summary>
         /// <param name="nodeGridList"></param>
         /// <returns></returns>
-        private IEnumerator CreateGrid(List<Node> nodeGridList)
+        private IEnumerator CreateGrid(List<Node> nodeGridList, int width, int height)
         {
-            for (int x = 0; x < gridWidth; x++)
+            width = gridWidth;
+            height = gridHeight;
+
+            for (int x = 0; x < width; x++)
             {
-                for (int z = 0; z < gridHeight; z++)
+                for (int z = 0; z < height; z++)
                 {
                     Node newNode = SpawnNewCellInstance(nodePrefab, SetNodePosition(x, z));
                     SetNodeAsChildToParent(newNode, transform);
                     nodeGridList.Add(newNode);
                 }
+                gameAudio.PlayClip();
                 yield return new WaitForSeconds(0.01f);
             }
 
@@ -130,6 +135,7 @@ namespace PerfectMazeProject.Grid
         private void GridIsDeleted()
         {
             isGridGenerated = false;
+            StopAllCoroutines();
         }
 
         #endregion
