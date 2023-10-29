@@ -6,16 +6,19 @@ namespace PerfectMazeProject.Grid
 {
     public class MazeGrid : MonoBehaviour
     {
+        public static MazeGrid instance;
 
         [SerializeField] private Node nodePrefab;
 
         public int gridWidth {  get; private set; }
         public int gridHeight { get; private set; }
 
-        #region EventListeners:
+        #region SingletonAndEventListeners:
 
         private void Start()
         {
+            InitializeSingleton();
+
             UIController.OnWidthValueChange += ChangeGridWidth;
             UIController.OnHeightValueChange += ChangeGridHeight;
         }
@@ -24,6 +27,14 @@ namespace PerfectMazeProject.Grid
         {
             UIController.OnWidthValueChange -= ChangeGridWidth;
             UIController.OnHeightValueChange -= ChangeGridHeight;
+        }
+
+        private void InitializeSingleton()
+        {
+            if (instance != null && instance != this)
+                Destroy(gameObject);
+            else
+                instance = this;
         }
 
         private void ChangeGridWidth(int value)

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController instance;
+
     [Header("Main Elements")]
     [SerializeField] private GameObject PlayPanel;
     [SerializeField] private GameObject MenuPanel;
@@ -38,9 +40,10 @@ public class UIController : MonoBehaviour
     // Dropdown Events:
     public static event Action<int> OnDropdownValueChange;
 
-    #region EventListeners
     void Awake()
     {
+        InitializeSingleton();
+
         // Buttons:
         playBtn.onClick.AddListener(ShowPlayMenu);
         backBtn.onClick.AddListener(ShowMainMenu);
@@ -65,7 +68,14 @@ public class UIController : MonoBehaviour
         // Toggle:
         generationMode.onValueChanged.RemoveAllListeners();
     }
-    #endregion
+
+    private void InitializeSingleton()
+    {
+        if (instance != null && instance != this)
+            Destroy(gameObject);
+        else
+            instance = this;
+    }
 
     #region Buttons:
 

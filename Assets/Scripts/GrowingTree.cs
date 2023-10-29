@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GrowingTree : MonoBehaviour
 {
-    [SerializeField] private MazeGrid grid;
+    private static GrowingTree instance;
 
     [SerializeField] private List<Node> spawnedNodes = new List<Node>();
     [SerializeField] private List<Node> nodes = new List<Node>();
@@ -58,9 +58,11 @@ public class GrowingTree : MonoBehaviour
         nextIndexMode = (NextNodeIndex)index;
     }
 
-    #region EventListeners:
+    #region SingletonAndEventListeners:
     private void Awake()
     {
+        InitializeSingleton();
+        //
         UIController.OnClickGenerateTheMazeButton += StartSimulation;
         UIController.OnClickBackButton += ResetMaze;
         UIController.OnDropdownValueChange += ChangeNextIndexMode;
@@ -69,9 +71,18 @@ public class GrowingTree : MonoBehaviour
     private void OnDestroy()
     {
         StopMazeSimulation();
+        //
         UIController.OnClickGenerateTheMazeButton -= StartSimulation;
         UIController.OnClickBackButton -= ResetMaze;
         UIController.OnDropdownValueChange -= ChangeNextIndexMode;
+    }
+
+    private void InitializeSingleton()
+    {
+        if (instance != null && instance != this)
+            Destroy(gameObject);
+        else
+            instance = this;
     }
     #endregion
 
@@ -104,7 +115,7 @@ public class GrowingTree : MonoBehaviour
     /// </summary>
     private void ClearGrid()
     {
-        grid.ClearCellGrid(spawnedNodes);
+        MazeGrid.instance.ClearCellGrid(spawnedNodes);
 
         spawnedNodes.Clear();
         nodes.Clear();
@@ -127,10 +138,10 @@ public class GrowingTree : MonoBehaviour
     /// </summary>
     private void Initialize()
     {
-        mazeWidth = grid.gridWidth;
-        mazeHeight = grid.gridHeight;
+        mazeWidth = MazeGrid.instance.gridWidth;
+        mazeHeight = MazeGrid.instance.gridHeight;
 
-        spawnedNodes = grid.GetNodeGrid();
+        spawnedNodes = MazeGrid.instance.GetNodeGrid();
 
         for (int i = 0; i < spawnedNodes.Count; i++)
             spawnedNodes[i].ResetWallsState();
