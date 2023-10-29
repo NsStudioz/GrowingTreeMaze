@@ -29,16 +29,6 @@ public class Node : MonoBehaviour
     #region PublicMethods:
 
     /// <summary>
-    /// Show all node's walls
-    /// </summary>
-    public void ResetWallsState()
-    {
-        foreach (GameObject wall in walls)
-            if (!wall.gameObject.activeInHierarchy)
-                wall.gameObject.SetActive(true);
-    }
-
-    /// <summary>
     /// mark node as visited
     /// </summary>
     public void SetNodeVisited()
