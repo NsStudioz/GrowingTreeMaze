@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour
     // Dropdown Events:
     public static event Action<int> OnDropdownValueChange;
 
-    void Awake()
+    private void Awake()
     {
         InitializeSingleton();
 
