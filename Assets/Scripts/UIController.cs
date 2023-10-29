@@ -9,8 +9,8 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     [Header("Main Elements")]
-    [SerializeField] private GameObject PlayPanel;
-    [SerializeField] private GameObject MenuPanel;
+    [SerializeField] private GameObject playPanel;
+    [SerializeField] private GameObject menuPanel;
 
     [Header("Maze Value Texts")]
     [SerializeField] private TMP_Text widthValueText;
@@ -84,8 +84,8 @@ public class UIController : MonoBehaviour
     /// </summary>
     private void ShowPlayMenu()
     {
-        MenuPanel.SetActive(false);
-        PlayPanel.SetActive(true);
+        menuPanel.SetActive(false);
+        playPanel.SetActive(true);
         InitializeWidthAndHeightValues(initialWidth, initialHeight);
         ChangeGenerationMode(0);
     }
@@ -95,8 +95,8 @@ public class UIController : MonoBehaviour
     /// </summary>
     private void ShowMainMenu()
     {
-        PlayPanel.SetActive(false);
-        MenuPanel.SetActive(true);
+        playPanel.SetActive(false);
+        menuPanel.SetActive(true);
         OnClickBackButton?.Invoke();
     }
 

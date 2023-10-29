@@ -3446,8 +3446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237c21148738002459779f0f67d71734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayPanel: {fileID: 918428644}
-  MenuPanel: {fileID: 284934711}
+  playPanel: {fileID: 918428644}
+  menuPanel: {fileID: 284934711}
   widthValueText: {fileID: 588762327}
   heightValueText: {fileID: 62236174}
   widthSilder: {fileID: 70226862}

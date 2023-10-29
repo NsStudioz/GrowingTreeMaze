@@ -20,10 +20,10 @@ namespace PerfectMazeProject.Camera
         private bool isZoomPointerDown;
 
         // Camera Clamping limits:
-        private int XZminValue = -100;
-        private int XZmaxValue = 250;
-        private int YminValue = -140;
-        private int YmaxValue = 100;
+        private int minValueXZ = -100;
+        private int maxValueXZ = 250;
+        private int minValueY = -140;
+        private int maxValueY = 100;
 
         #region Helpers:
 
@@ -41,9 +41,9 @@ namespace PerfectMazeProject.Camera
         // Camera boundries, this will prevent camera from moving too far away from screen:
         private void ClampCameraPositions()
         {
-            cameraPos.x = Mathf.Clamp(cameraPos.x, XZminValue, XZmaxValue);
-            cameraPos.z = Mathf.Clamp(cameraPos.z, XZminValue, XZmaxValue);
-            cameraPos.y = Mathf.Clamp(cameraPos.y, YminValue, YmaxValue);
+            cameraPos.x = Mathf.Clamp(cameraPos.x, minValueXZ, maxValueXZ);
+            cameraPos.z = Mathf.Clamp(cameraPos.z, minValueXZ, maxValueXZ);
+            cameraPos.y = Mathf.Clamp(cameraPos.y, minValueY, maxValueY);
         }
 
         #endregion
