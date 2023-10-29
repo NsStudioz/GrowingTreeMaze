@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,10 @@ namespace PerfectMazeProject.Grid
 
         public int gridWidth {  get; private set; }
         public int gridHeight { get; private set; }
+
+        public bool isGridGenerated { get; private set; }
+
+        public static event Action<bool> OnGridGenerated;
 
         #region SingletonAndEventListeners:
 
@@ -54,19 +59,35 @@ namespace PerfectMazeProject.Grid
         /// node list getter. positioning every created node, setting it as child to this parent gameobject and adding it to the list.
         /// </summary>
         /// <returns></returns>
-        public List<Node> GetNodeGrid()
+        public List<Node> GetNodeGridCoroutine()
         {
             List<Node> nodeGridList = new List<Node>();
 
+            StartCoroutine(CreateGrid(nodeGridList));
+
+            return nodeGridList;
+        }
+
+        /// <summary>
+        /// nodes grid coroutine task
+        /// </summary>
+        /// <param name="nodeGridList"></param>
+        /// <returns></returns>
+        private IEnumerator CreateGrid(List<Node> nodeGridList)
+        {
             for (int x = 0; x < gridWidth; x++)
+            {
                 for (int z = 0; z < gridHeight; z++)
                 {
                     Node newNode = SpawnNewCellInstance(nodePrefab, SetNodePosition(x, z));
                     SetNodeAsChildToParent(newNode, transform);
                     nodeGridList.Add(newNode);
                 }
+                yield return new WaitForSeconds(0.01f);
+            }
 
-            return nodeGridList;
+            GridIsGenerated();
+            OnGridGenerated?.Invoke(isGridGenerated);
         }
 
         /// <summary>
@@ -75,6 +96,8 @@ namespace PerfectMazeProject.Grid
         /// <param name="nodeGridList"></param>
         public void ClearCellGrid(List<Node> nodeGridList) 
         {
+            GridIsDeleted();
+
             for (int i = 0; i < nodeGridList.Count; i++)
                 Destroy(nodeGridList[i].gameObject);
         }
@@ -97,6 +120,16 @@ namespace PerfectMazeProject.Grid
         private void SetNodeAsChildToParent(Node prefab, Transform parent)
         {
             prefab.transform.parent = parent;
+        }
+
+        private void GridIsGenerated()
+        {
+            isGridGenerated = true;
+        }
+
+        private void GridIsDeleted()
+        {
+            isGridGenerated = false;
         }
 
         #endregion

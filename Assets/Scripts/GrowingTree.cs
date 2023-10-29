@@ -66,6 +66,7 @@ public class GrowingTree : MonoBehaviour
         UIController.OnClickGenerateTheMazeButton += StartSimulation;
         UIController.OnClickBackButton += ResetMaze;
         UIController.OnDropdownValueChange += ChangeNextIndexMode;
+        MazeGrid.OnGridGenerated += SimulateTheMaze;
     }
 
     private void OnDestroy()
@@ -75,6 +76,7 @@ public class GrowingTree : MonoBehaviour
         UIController.OnClickGenerateTheMazeButton -= StartSimulation;
         UIController.OnClickBackButton -= ResetMaze;
         UIController.OnDropdownValueChange -= ChangeNextIndexMode;
+        MazeGrid.OnGridGenerated -= SimulateTheMaze;
     }
 
     private void InitializeSingleton()
@@ -93,8 +95,7 @@ public class GrowingTree : MonoBehaviour
     private void StartSimulation()
     {
         ResetMaze();
-
-        GenerateTheMaze();
+        Initialize();
     }
 
     /// <summary>
@@ -122,15 +123,17 @@ public class GrowingTree : MonoBehaviour
     }
 
     /// <summary>
-    /// Begin Maze Simulation
+    /// Start Maze Simulation
     /// </summary>
-    private void GenerateTheMaze()
+    /// <param name="state"></param>
+    private void SimulateTheMaze(bool state)
     {
-        Initialize();
+        if (state)
+        {
+            SetFirstRandomIndex();
 
-        SetFirstRandomIndex();
-
-        StartCoroutine(GrowingTreeSimulation());
+            StartCoroutine(GrowingTreeSimulation());
+        }
     }
 
     /// <summary>
@@ -141,7 +144,7 @@ public class GrowingTree : MonoBehaviour
         mazeWidth = MazeGrid.instance.gridWidth;
         mazeHeight = MazeGrid.instance.gridHeight;
 
-        spawnedNodes = MazeGrid.instance.GetNodeGrid();
+        spawnedNodes = MazeGrid.instance.GetNodeGridCoroutine();
 
         for (int i = 0; i < spawnedNodes.Count; i++)
             spawnedNodes[i].ResetWallsState();
