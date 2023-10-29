@@ -22,7 +22,7 @@ namespace PerfectMazeProject.Camera
         // Camera Clamping limits:
         private int XZminValue = -100;
         private int XZmaxValue = 250;
-        private int YminValue = -125;
+        private int YminValue = -140;
         private int YmaxValue = 100;
 
         #region Helpers:
