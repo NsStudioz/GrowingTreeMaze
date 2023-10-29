@@ -9,6 +9,7 @@ namespace PerfectMazeProject.Grid
     {
         public static MazeGrid instance;
 
+        [Header("Main Elements")]
         [SerializeField] private Node nodePrefab;
         [SerializeField] private GameAudio gameAudio;
 

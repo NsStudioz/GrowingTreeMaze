@@ -7,16 +7,17 @@ using UnityEngine;
 public class GrowingTree : MonoBehaviour
 {
     private static GrowingTree instance;
-
+    
+    [Header("Audio")]
     [SerializeField] private GameAudio gameAudio;
 
+    [Header("Main Elements")]
+    [SerializeField] private float generationSpeed = 0.0001f;
     [SerializeField] private List<Node> spawnedNodes = new List<Node>();
     [SerializeField] private List<Node> nodes = new List<Node>();
 
-    [SerializeField] private int mazeWidth;
-    [SerializeField] private int mazeHeight;
-
-    [SerializeField] private float generationSpeed = 0.0001f;
+    private int mazeWidth;
+    private int mazeHeight;
 
     private enum NextNodeIndex
     {
